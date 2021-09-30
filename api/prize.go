@@ -92,7 +92,11 @@ func AddPrize(ctx *gin.Context) {
 }
 
 func EditPrize(ctx *gin.Context) {
-	id := ctx.PostForm("id")
+	id := ctx.PostForm("ID")
+	if id == "" {
+		ctx.JSON(http.StatusBadRequest, format.Response{Code: Code.Failed, Msg: "error:not exist prize ID! "})
+		return
+	}
 	iID, _ := strconv.Atoi(id)
 	Name := ctx.PostForm("Name")
 	Count := ctx.PostForm("Count")

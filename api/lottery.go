@@ -10,7 +10,13 @@ import (
 )
 
 func Lottery(ctx *gin.Context)  {
-	name := ctx.PostForm("name")
+	//name := ctx.PostForm("name")
+	//avatar := ctx.PostForm("avatar")
+	var user format.User
+	if err := ctx.BindJSON(&user); err != nil {
+		ctx.JSON(http.StatusBadRequest,format.Response{Code:Code.Failed,Msg:err.Error()})
+		return
+	}
 	prizes,err := model.GetPrizes()
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest,format.Response{Code:Code.Failed,Msg:"Lottery failed"})
@@ -22,13 +28,14 @@ func Lottery(ctx *gin.Context)  {
 		return
 	}
 	award := model.Winner{}
-	award.UserName = name
+	award.UserName = user.Name
 	award.PrizeID = prize.ID
 	award.Name = prize.Name
 	award.Pic = prize.Pic
 	award.Count = 1
 	award.Unit = prize.Unit
 	award.Remarks = prize.Remarks
+	award.Avatar = user.Avatar
 	DispatchData(award)
 	model.AddWinner(award)
 	ctx.JSON(http.StatusOK,award)
