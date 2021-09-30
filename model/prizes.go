@@ -20,6 +20,9 @@ func GetPrizes() ([]Prize,error) {
 	return prizes,res.Error
 }
 
+func EditPrize(prize Prize)  {
+	DB.Model(&prize).Update(prize)
+}
 func AddPrize(prize Prize)  {
   	 DB.Create(&prize)
 }

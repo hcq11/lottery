@@ -20,7 +20,9 @@ func (hs *HTTPSrv) Run() {
 	v1 := router.Group("/v1")
 	{
 		v1.GET("/prizes", GetPrizes)
+		v1.GET("/winners",GetWinners)
 		v1.POST("/prize", AddPrize)
+		v1.PUT("/prize",EditPrize)
 		v1.DELETE("/prize/:id", DelPrize)
 		v1.GET("/notify", NotifySocket)
 
