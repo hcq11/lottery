@@ -1,14 +1,24 @@
 package api
 
 import (
+	_ "lottery/docs"
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/files"       // swagger embed files
-	"github.com/swaggo/gin-swagger" // gin-swagger middleware
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"lottery/configs"
 	"net/http"
 )
+// @title Lottery API
+// @version 1.0
+// @description Lottery API.
 
+// @contact.name Eden
+// @contact.email Eden@ubtrobot.com
 
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @BasePath /v1
 type HTTPSrv struct {
 }
 

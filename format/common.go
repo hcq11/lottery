@@ -7,6 +7,6 @@ type Response struct {
 }
 
 type User struct {
-	Name string `json:"name"`
-	Avatar string `json:"avatar"`
+	Name string `json:"Name"`
+	Avatar string `json:"Avatar"`
 }
