@@ -14,17 +14,11 @@ import (
 	"strconv"
 )
 
-// @Tags 抽奖
-// @Summary 抽奖
+// @Tags 奖品设置
+// @Summary 获取所有奖品
 // @Description
 // @Accept json
 // @Produce json
-// @Param Name formData string true "奖品名称"
-// @Param Count formData integer true "数量" 取值 1 ~ 9999" minimum(1) maximum(9999)
-// @Param Unit formData string true "单位 个,件..."
-// @Param Rate formData integer true "中奖率" 取值 1 ~ 9999" minimum(1) maximum(9999)
-// @Param Remarks formData string false "备注"
-// @Param file formData file true "奖品图片"
 // @Success 200 {object} model.Prize
 // @Failure 400 {object} format.Response
 // @Router /prizes [get]
@@ -37,10 +31,10 @@ func GetPrizes(ctx *gin.Context) {
 
 }
 
-// @Tags 抽奖
-// @Summary 抽奖
+// @Tags 奖品设置
+// @Summary 增加奖品
 // @Description
-// @Accept json
+// @Accept multipart/form-data
 // @Produce json
 // @Param Name formData string true "奖品名称"
 // @Param Count formData integer true "数量" 取值 1 ~ 9999" minimum(1) maximum(9999)
@@ -91,6 +85,20 @@ func AddPrize(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, format.Response{Code: Code.Success, Msg: "success"})
 }
 
+// @Tags 奖品设置
+// @Summary 编辑奖品
+// @Description 编辑奖品
+// @Accept multipart/form-data
+// @Produce json
+// @Param ID formData string true "奖品ID"
+// @Param Name formData string false "奖品名称"
+// @Param Count formData integer false "数量" 取值 1 ~ 9999" minimum(1) maximum(9999)
+// @Param Unit formData string false "单位 个,件..."
+// @Param Rate formData integer false "中奖率" 取值 1 ~ 9999" minimum(1) maximum(9999)
+// @Param Remarks formData string false "备注"
+// @Success 200 {object} format.Response
+// @Failure 400 {object} format.Response
+// @Router /prize [put]
 func EditPrize(ctx *gin.Context) {
 	id := ctx.PostForm("ID")
 	if id == "" {
@@ -117,8 +125,8 @@ func EditPrize(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, format.Response{Code: Code.Success, Msg: "success"})
 }
 
-// @Tags 抽奖
-// @Summary 抽奖
+// @Tags 奖品设置
+// @Summary 删除奖品
 // @Description
 // @Accept json
 // @Produce json
@@ -140,10 +148,4 @@ func DelPrize(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, format.Response{Code: Code.Success, Msg: "success"})
 }
 
-func GetWinners(ctx *gin.Context) {
-	winners, err := model.GetWinners()
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, format.Response{Code: Code.Failed, Msg: err.Error()})
-	}
-	ctx.JSON(http.StatusOK, winners)
-}
+

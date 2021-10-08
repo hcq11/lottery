@@ -21,6 +21,14 @@ var upGrader = websocket.Upgrader{
 	},
 }
 
+// @Tags 抽奖
+// @Summary 抽奖结果通知(websocket)
+// @Description ws://@host:9265/v1/notify
+// @Accept json
+// @Produce json
+// @Success 200 {object} model.Winner
+// @Failure 400 {object} format.Response
+// @Router /notify [get]
 func NotifySocket(r *gin.Context) {
 	ws,err := upGrader.Upgrade(r.Writer,r.Request,nil)
 	if err != nil {

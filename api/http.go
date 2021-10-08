@@ -13,7 +13,6 @@ import (
 // @description Lottery API.
 
 // @contact.name Eden
-// @contact.email Eden@ubtrobot.com
 
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
